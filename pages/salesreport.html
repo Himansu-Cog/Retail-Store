@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Report & Cash Settlement</title>
+    <link rel="stylesheet" href="/css/salesreport.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>  
+
+<div class="container">
+ 
+    <div class="page-header">
+        <h1>Sales Report & Cash Settlement Module</h1>
+        <p>Generate sales summaries and reconcile cashier totals.</p>
+        <a href="../dashboard.html" class="home-btn" >
+        <i class="fas fa-home"></i>Home</a>
+    </div>
+ 
+    <div class="card-container">
+ 
+        <div class="card">
+            <h4>Total Sales</h4>
+            <h2 id="totalSales">₹17,470</h2>
+        </div>
+
+        <div class="card">
+            <h4>Total Discount</h4>
+            <h2 id="totalDiscount">₹1,150</h2>
+        </div>
+  
+        <div class="card">
+            <h4>Total Transactions</h4>
+            <h2 id="totalTransactions">10</h2>
+        </div>
+ 
+        <div class="card">
+            <h4>Total Net Amount</h4>
+            <h2 id="totalNetAmount">₹16,320</h2>
+        </div>
+ 
+    </div>
+    <div class="filter-section">
+ 
+        <input type="date" id="reportDate" value="2026-06-20">
+        <select id="cashierSelect">
+            <option value="">All Cashier</option>
+            <option value="USR-102">Bala Ganesh</option>
+            <option value="USR-103">Yasaswi</option>
+            <option value="USR-104">Shivansh</option>
+        </select>
+        <button onclick="generateDailySalesReport()">
+            Generate Report
+        </button><br>
+        <button onclick="exportCSV()">
+            CSV
+        </button><br>
+        <button onclick="exportPDF()">
+            PDF
+        </button><br>
+ 
+    </div>
+     <div class="table-section">
+ 
+        <h3>Settlement Ledger</h3>
+        <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Transaction ID</th>
+                    <th>Settlement Date</th>
+                    <th>Product</th>
+                    <th>Payment Mode</th>
+                    <th>Qty</th>
+                    <th>Amount</th>
+                    <th>Discount</th>
+                    <th>Net Amount</th>
+                    <th>Status</th>
+                    <th>Settlement ID</th>
+                    <th>Cashiers</th>
+                </tr>
+            </thead> 
+            <tbody id="salesTableBody">
+                <tr>
+                    <td>TXN-901244</td>
+                    <td>2026-06-20</td>
+                    <td>Amul Taza Fresh Milk (1L)</td>
+                    <td>Cash</td>
+                    <td>10</td>
+                    <td>₹1500</td>
+                    <td>₹100</td>
+                    <td>₹1400</td>
+                    <td>Completed</td>
+                    <td>SET-77102</td>
+                    <td>Yasaswi</td>
+                </tr>
+                <tr>
+                    <td>TXN-301294</td>
+                    <td>2026-06-20</td>
+                    <td>Coca-Cola Zero Sugar (300ml Can)</td>
+                    <td>UPI</td>
+                    <td>5</td>
+                    <td>₹450</td>
+                    <td>₹0</td>
+                    <td>₹450</td>
+                    <td>Completed</td>
+                    <td>SET-77102</td>
+                    <td>Yasaswi</td>
+                </tr>
+                <tr>
+                    <td>TXN-441029</td>
+                    <td>2026-06-19</td>
+                    <td>Syska Smart LED Bulb 12W</td>
+                    <td>Card</td>
+                    <td>4</td>
+                    <td>₹2300</td>
+                    <td>₹150</td>
+                    <td>₹2150</td>
+                    <td>Completed</td>
+                    <td>SET-77101</td>
+                    <td>Shivansh</td>
+                </tr>
+                <tr>
+                    <td>TXN-881023</td>
+                    <td>2026-06-18</td>
+                    <td>Lays Classic Chips</td>
+                    <td>UPI</td>
+                    <td>20</td>
+                    <td>₹890</td>
+                    <td>₹40</td>
+                    <td>₹850</td>
+                    <td>Completed</td>
+                    <td>SET-77100</td>
+                    <td>Yasaswi</td>
+                </tr>
+                <tr>
+                    <td>TXN-551022</td>
+                    <td>2026-06-15</td>
+                    <td>Amul Taza Fresh Milk (1L)</td>
+                    <td>Cash</td>
+                    <td>2</td>
+                    <td>₹120</td>
+                    <td>₹0</td>
+                    <td>₹120</td>
+                    <td>Completed</td>
+                    <td>SET-77099</td>
+                    <td>Bala Ganesh</td>
+                </tr>
+                <tr>
+                    <td>TXN-112294</td>
+                    <td>2026-06-10</td>
+                    <td>Nescafe Coffee (100g)</td>
+                    <td>Card</td>
+                    <td>8</td>
+                    <td>₹3400</td>
+                    <td>₹200</td>
+                    <td>₹3200</td>
+                    <td>Completed</td>
+                    <td>SET-77098</td>
+                    <td>Bala Ganesh</td>
+                </tr>
+                <tr>
+                    <td>TXN-667102</td>
+                    <td>2026-05-25</td>
+                    <td>Cadbury Dairy Milk</td>
+                    <td>UPI</td>
+                    <td>12</td>
+                    <td>₹1150</td>
+                    <td>₹50</td>
+                    <td>₹1100</td>
+                    <td>Completed</td>
+                    <td>SET-77095</td>
+                    <td>Shivansh</td>
+                </tr>
+                <tr>
+                    <td>TXN-334109</td>
+                    <td>2026-05-14</td>
+                    <td>Surf Excel Easy Wash</td>
+                    <td>Cash</td>
+                    <td>5</td>
+                    <td>₹900</td>
+                    <td>₹0</td>
+                    <td>₹900</td>
+                    <td>Completed</td>
+                    <td>SET-77092</td>
+                    <td>Bala Ganesh</td>
+                </tr>
+                <tr>
+                    <td>TXN-998201</td>
+                    <td>2026-04-05</td>
+                    <td>Aashirvaad Atta (5kg)</td>
+                    <td>Card</td>
+                    <td>15</td>
+                    <td>₹5400</td>
+                    <td>₹400</td>
+                    <td>₹5000</td>
+                    <td>Completed</td>
+                    <td>SET-77080</td>
+                    <td>Yasaswi</td>
+                </tr>
+                <tr>
+                    <td>TXN-554192</td>
+                    <td>2026-01-12</td>
+                    <td>Lays Classic Chips</td>
+                    <td>UPI</td>
+                    <td>4</td>
+                    <td>₹160</td>
+                    <td>₹10</td>
+                    <td>₹150</td>
+                    <td>Completed</td>
+                    <td>SET-771010</td>
+                    <td>Bala Ganesh</td>
+                </tr>
+            </tbody>
+        </table>
+        </div> 
+    </div>
+ 
+    <div class="bottom-grid">
+ 
+        <div class="summary-card">
+            <h3>Payment Summary</h3>
+            <p id="cashTotal">Cash : ₹2,420</p>
+            <p id="upiTotal">UPI : ₹2,550</p>
+            <p id="cardTotal">Card : ₹11,350</p>
+        </div> 
+        <div class="summary-card">
+            <h3>Payment Insights</h3>
+            <p id="visibleRecords">Most Used : UPI (4 Transactions)</p>
+            <p id="cashTransactions">Cash Transactions : 3</p>
+            <p id="upiTransactions">UPI Transactions : 4</p>
+            <p id="cardTransactions">Card Transactions : 3</p>
+        </div>
+    </div>
+</div>
+ 
+<script src="../js/salesreports.js"></script>
+ 
+</body>
+</html>
