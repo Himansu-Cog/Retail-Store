@@ -1,0 +1,605 @@
+:root {
+    --primary-color: #1E3A5F;
+    --primary-hover: #142842;
+    --bg-color: #F4F6F9;
+    --card-bg: #FFFFFF;
+    --border-color: #CBD5E1;
+    --text-main: #334155;
+    --text-muted: #64748B;
+    --success: #15803D;
+    --warning: #B45309;
+    --danger: #B91C1C;
+    --radius: 6px;
+    --shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-size: 13px;
+    padding: 20px;
+}
+
+.app-container {
+    max-width: 1500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* Header UI Elements */
+.erp-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--card-bg);
+    padding: 14px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-logo {
+    font-size: 22px;
+    color: var(--primary-color);
+}
+
+.header-brand h1 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.action-toolbar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Panels Components */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 16px;
+    box-shadow: var(--shadow);
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 6px;
+    margin-bottom: 12px;
+}
+
+.panel-header h3 {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Dashboard KPI Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.kpi-card {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    box-shadow: var(--shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.kpi-desc-box label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: block;
+}
+
+.kpi-desc-box h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-top: 2px;
+}
+
+.kpi-icon {
+    width: 36px;
+    height: 36px;
+    background: #F1F5F9;
+    color: var(--primary-color);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.kpi-card.lowstock-alert {
+    border-left: 4px solid var(--warning);
+}
+
+.kpi-card.oos-alert {
+    border-left: 4px solid var(--danger);
+}
+
+/* Layout Grid Configuration */
+.analytics-layout-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.analytics-subgrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.analytics-data-node {
+    background: #F8FAFC;
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    border-radius: var(--radius);
+}
+
+.analytics-data-node label {
+    font-size: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    display: block;
+    font-weight: 600;
+}
+
+.analytics-data-node span {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary-color);
+    display: block;
+    margin-top: 4px;
+}
+
+/* Order Recommendations Scroll Styling */
+.recommendation-list.scroller-view {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    height: 76px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.rec-item-card {
+    background: #F8FAFC;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 8px 12px;
+}
+
+.rec-item-card.critical {
+    border-left: 3px solid var(--danger);
+}
+
+.rec-item-card.warning {
+    border-left: 3px solid var(--warning);
+}
+
+.rec-info-desc h4 {
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.rec-info-desc p {
+    font-size: 10px;
+    color: var(--text-muted);
+}
+
+/* Filter Configuration Panel */
+.filter-card {
+    padding: 12px 16px;
+}
+
+.filter-layout {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.search-box-wrapper {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.search-box-wrapper i {
+    position: absolute;
+    left: 12px;
+    color: var(--text-muted);
+}
+
+.search-box-wrapper input {
+    width: 100%;
+    padding: 8px 12px 8px 34px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    outline: none;
+    font-size: 12px;
+}
+
+.select-field select {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    background: white;
+    font-size: 12px;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Master Grid Structure Layout */
+.workspace-layout-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 14px;
+    align-items: start;
+}
+
+.table-panel-card {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Fixed Product Scroller Container Engine */
+.table-scroll-viewport.product-scroller-container {
+    height: 409px;
+    /* (10 rows * 37px) + 39px header = 409px exact height match */
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+}
+
+/* Sidebar Heights matching table rows */
+.sticky-sidebar-wrapper {
+    position: sticky;
+    top: 15px;
+    z-index: 100;
+}
+
+.form-panel-card {
+    display: flex;
+    flex-direction: column;
+    height: 409px;
+    overflow: hidden;
+}
+
+.form-fields-scroll-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 4px;
+    margin-bottom: 4px;
+}
+
+/* ERP Data Table Viewport Layout styles */
+.erp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.erp-table th {
+    background: #F1F5F9;
+    color: var(--primary-color);
+    font-weight: 700;
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    height: 39px;
+}
+
+.erp-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-color);
+    background: white;
+    vertical-align: middle;
+    height: 37px;
+}
+
+.erp-table tbody tr:hover td {
+    background-color: #F8FAFC;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+/* Status Labels Badges */
+.badge-status {
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: inline-block;
+    width: 95px;
+    text-align: center;
+}
+
+.status-green {
+    background: #DCFCE7;
+    color: var(--success);
+}
+
+.status-orange {
+    background: #FEF3C7;
+    color: var(--warning);
+}
+
+.status-red {
+    background: #FEE2E2;
+    color: var(--danger);
+}
+
+/* Custom Buttons Framework Actions */
+.btn {
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: var(--radius);
+    cursor: pointer;
+    border: 1px solid transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+}
+
+.btn-outline {
+    background: transparent;
+    border-color: var(--border-color);
+    color: var(--text-main);
+}
+
+.btn-outline:hover {
+    background: #F1F5F9;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.btn-table {
+    padding: 4px 8px;
+    font-size: 11px;
+    border-radius: 3px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.btn-table:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    background: #EFF6FF;
+}
+
+/* Forms Input Core Rules Structure */
+.form-group {
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    outline: none;
+    font-size: 12px;
+    background: white;
+}
+
+.radio-pill-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.radio-pill {
+    cursor: pointer;
+    position: relative;
+    display: block;
+}
+
+.radio-pill input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.radio-pill span {
+    display: block;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 8px;
+    text-align: center;
+    font-weight: 600;
+    background: #F8FAFC;
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.radio-pill input:checked+span {
+    border-color: var(--primary-color);
+    background: #EFF6FF;
+    color: var(--primary-color);
+    box-shadow: inset 0 0 0 1px var(--primary-color);
+}
+
+.form-actions-row {
+    margin-top: 12px;
+    border-top: 1px dashed var(--border-color);
+    padding-top: 10px;
+}
+
+/* Print Styles Ruleset Engine overrides */
+.print-only {
+    display: none;
+}
+
+@media print {
+
+    .no-print,
+    header,
+    section,
+    .filter-card,
+    .analytics-layout-grid,
+    .sticky-sidebar-wrapper,
+    th:last-child,
+    td:last-child {
+        display: none !important;
+    }
+
+    body,
+    html {
+        background: #FFFFFF !important;
+        color: #000000 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .app-container {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    .card,
+    .table-panel-card,
+    .table-scroll-viewport.product-scroller-container {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        width: 100% !important;
+        max-height: none !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    .print-only {
+        display: block !important;
+    }
+
+    .print-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .print-header h2 {
+        font-size: 15px;
+        font-weight: bold;
+        color: #000000;
+    }
+
+    .print-header p {
+        font-size: 11px;
+        color: #333333;
+        margin-top: 4px;
+    }
+
+    .print-divider {
+        border-top: 2px dashed #000000;
+        margin-top: 8px;
+    }
+
+    .erp-table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+    }
+
+    .erp-table th {
+        background: #E2E8F0 !important;
+        color: #000000 !important;
+        border-bottom: 2px solid #000000 !important;
+        font-size: 11px !important;
+        padding: 8px !important;
+    }
+
+    .erp-table td {
+        background: white !important;
+        color: #000000 !important;
+        border-bottom: 1px solid #888888 !important;
+        font-size: 11px !important;
+        padding: 8px !important;
+        height: auto !important;
+    }
+
+    .badge-status {
+        background: none !important;
+        color: black !important;
+        padding: 0 !important;
+        font-weight: bold !important;
+        font-size: 10px !important;
+    }
+}
