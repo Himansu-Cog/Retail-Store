@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store Inventory & Stock Management</title>
+    <link rel="stylesheet" href="../css/inventory.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="erp-workspace">
+
+    <div class="app-container">
+        <header class="erp-header no-print">
+            <div class="header-brand">
+                <i class="fa-solid fa-warehouse brand-logo"></i>
+                <div>
+                    <h1>Store Inventory & Stock Management</h1>
+                </div>
+            </div>
+            <div class="action-toolbar">
+                <a href="../dashboard.html" class="btn btn-outline" style="text-decoration:none;"><i class="fa-solid fa-house"></i> Home Dashboard</a>
+                <button type="button" class="btn btn-primary"><i class="fa-solid fa-print"></i> Print Items List</button>
+            </div>
+        </header>
+
+        <section class="stats-grid no-print">
+            <div class="kpi-card">
+                <div class="kpi-desc-box"><label>Total Items</label><h3>12</h3></div>
+                <div class="kpi-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-desc-box"><label>Total Shelf Stock</label><h3>1,686</h3></div>
+                <div class="kpi-icon"><i class="fa-solid fa-cubes"></i></div>
+            </div>
+            <div class="kpi-card lowstock-alert">
+                <div class="kpi-desc-box"><label>Low Stock Warnings</label><h3>1</h3></div>
+                <div class="kpi-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            </div>
+            <div class="kpi-card oos-alert">
+                <div class="kpi-desc-box"><label>Out of Stock Items</label><h3>2</h3></div>
+                <div class="kpi-icon"><i class="fa-solid fa-circle-xmark"></i></div>
+            </div>
+        </section>
+
+        <div class="analytics-layout-grid no-print">
+            <div class="card panel-card">
+                <div class="panel-header"><i class="fa-solid fa-chart-pie"></i> <h3>Total Financial Valuation</h3></div>
+                <div class="analytics-subgrid">
+                    <div class="analytics-data-node"><label>Total Inventory Cost</label><span>₹62,027.00</span></div>
+                    <div class="analytics-data-node"><label>Total Stock Count</label><span>1,686 Units</span></div>
+                </div>
+            </div>
+            <div class="card panel-card">
+                <div class="panel-header"><i class="fa-solid fa-truck-ramp-box"></i> <h3>Smart Order Recommendations</h3></div>
+                <div class="recommendation-list scroller-view">
+                    <div class="rec-item-card critical">
+                        <div class="rec-info-desc">
+                            <h4>Coca-Cola Zero Sugar (300ml Can)</h4>
+                            <p>Current: 0 units | Status: OUT OF STOCK | Supplier: Hindustan Coca-Cola</p>
+                        </div>
+                    </div>
+                    <div class="rec-item-card critical">
+                        <div class="rec-info-desc">
+                            <h4>Nescafe Classic Coffee (100g)</h4>
+                            <p>Current: 0 units | Status: OUT OF STOCK | Supplier: Nestle India</p>
+                        </div>
+                    </div>
+                    <div class="rec-item-card warning">
+                        <div class="rec-info-desc">
+                            <h4>Amul Taza Fresh Milk (1L)</h4>
+                            <p>Current: 4 units (Threshold: 15) | Status: LOW STOCK | Supplier: Amul Dairy Corp</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card filter-card no-print">
+            <div class="filter-layout">
+                <div class="search-box-wrapper">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search by item name, unique product ID, or barcode...">
+                </div>
+                <div class="select-field">
+                    <select>
+                        <option value="ALL">Show All Stock Levels</option>
+                        <option value="INSTOCK">Status: In Stock (Healthy)</option>
+                        <option value="LOWSTOCK">Status: Low Stock (Warning)</option>
+                        <option value="OUTOFSTOCK">Status: Out of Stock (Critical)</option>
+                    </select>
+                </div>
+                <button type="button" class="btn btn-outline">Clear Search</button>
+            </div>
+        </div>
+
+        <div class="print-only print-header">
+            <h2>CORERETAIL SUITE - MASTER STOCK LEDGER REPORT</h2>
+            <p>Scope Context: FMCG & Electronics Master Catalogue | Generated: 2026-06-26</p>
+            <div class="print-divider"></div>
+        </div>
+
+        <div class="workspace-layout-grid">
+            
+            <div class="card table-panel-card">
+                <div class="panel-header no-print"><i class="fa-solid fa-list"></i> <h3>Current On-Shelf Stock Ledger</h3></div>
+                <div class="table-responsive table-scroll-viewport product-scroller-container">
+                    <table class="erp-table">
+                        <thead>
+                            <tr>
+                                <th class="text-left">Item ID</th>
+                                <th class="text-left">Item Name / Description</th>
+                                <th class="text-left">Barcode Reference</th>
+                                <th class="text-left">Category</th>
+                                <th class="text-right">Price</th>
+                                <th class="text-right">Current Stock</th>
+                                <th class="text-right">Alert Level</th>
+                                <th class="text-center">Stock Status</th>
+                                <th class="text-center no-print">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-left">SKU-402911</td>
+                                <td class="text-left">Amul Taza Fresh Milk (1L)</td>
+                                <td class="text-left">BAR892144</td>
+                                <td class="text-left">FMCG - Perishables</td>
+                                <td class="text-right">₹68.00</td>
+                                <td class="text-right">4</td>
+                                <td class="text-right">15</td>
+                                <td class="text-center"><span class="badge-status status-orange">Low Stock</span></td>
+                                <td class="text-center no-print"><button class="btn-table">Select</button></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">SKU-109402</td>
+                                <td class="text-left">Coca-Cola Zero Sugar (300ml Can)</td>
+                                <td class="text-left">BAR401292</td>
+                                <td class="text-left">FMCG - Beverages</td>
+                                <td class="text-right">₹40.00</td>
+                                <td class="text-right">0</td>
+                                <td class="text-right">20</td>
+                                <td class="text-center"><span class="badge-status status-red">Out Of Stock</span></td>
+                                <td class="text-center no-print"><button class="btn-table">Select</button></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">SKU-884105</td>
+                                <td class="text-left">Britannia Marie Gold Family Pack</td>
+                                <td class="text-left">BAR110294</td>
+                                <td class="text-left">FMCG - Packaged Foods</td>
+                                <td class="text-right">₹35.00</td>
+                                <td class="text-right">200</td>
+                                <td class="text-right">25</td>
+                                <td class="text-center"><span class="badge-status status-green">In Stock</span></td>
+                                <td class="text-center no-print"><button class="btn-table">Select</button></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">SKU-501224</td>
+                                <td class="text-left">Syska Smart LED Bulb 12W</td>
+                                <td class="text-left">BAR501224</td>
+                                <td class="text-left">Consumer Electronics</td>
+                                <td class="text-right">₹299.00</td>
+                                <td class="text-right">32</td>
+                                <td class="text-right">10</td>
+                                <td class="text-center"><span class="badge-status status-green">In Stock</span></td>
+                                <td class="text-center no-print"><button class="btn-table">Select</button></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">SKU-600057</td>
+                                <td class="text-left">Diet Coke (330ml Can)</td>
+                                <td class="text-left">BAR600057</td>
+                                <td class="text-left">FMCG - Beverages</td>
+                                <td class="text-right">₹40.00</td>
+                                <td class="text-right">200</td>
+                                <td class="text-right">100</td>
+                                <td class="text-center"><span class="badge-status status-green">In Stock</span></td>
+                                <td class="text-center no-print"><button class="btn-table">Select</button></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">SKU-779544</td>
+                                <td class="text-left">Lays Classic Salted Chips</td>
+                                <td class="text-left">BAR779544</td>
+                                <td class="text-left">FMCG - Packaged Foods</td>
+                                <td class="text-right">₹20.00</td>
+                                <td class="text-right">100</td>
+                                <td class="text-right">15</td>
+                                <td class="text-center"><span class="badge-status status-green">In Stock</span></td>
+                                <td class="text-center no-print"><button class="btn-table">Select</button></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">SKU-112233</td>
+                                <td class="text-left">Cadbury Dairy Milk Silk</td>
+                                <td class="text-left">BAR112233</td>
+                                <td class="text-left">FMCG - Packaged Foods</td>
+                                <td class="text-right">₹80.00</td>
+                                <td class="text-right">43</td>
+                                <td class="text-right">20</td>
+                                <td class="text-center"><span class="badge-status status-green">In Stock</span></td>
+                                <td class="text-center no-print"><button class="btn-table">Select</button></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">SKU-445566</td>
+                                <td class="text-left">Nescafe Classic Coffee (100g)</td>
+                                <td class="text-left">BAR445566</td>
+                                <td class="text-left">FMCG - Packaged Foods</td>
+                                <td class="text-right">₹320.00</td>
+                                <td class="text-right">0</td>
+                                <td class="text-right">15</td>
+                                <td class="text-center"><span class="badge-status status-red">Out Of Stock</span></td>
+                                <td class="text-center no-print"><button class="btn-table">Select</button></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">SKU-778899</td>
+                                <td class="text-left">Tata Salt Iodized (1kg)</td>
+                                <td class="text-left">BAR778899</td>
+                                <td class="text-left">FMCG - Packaged Foods</td>
+                                <td class="text-right">₹28.00</td>
+                                <td class="text-right">400</td>
+                                <td class="text-right">50</td>
+                                <td class="text-center"><span class="badge-status status-green">In Stock</span></td>
+                                <td class="text-center no-print"><button class="btn-table">Select</button></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">SKU-990011</td>
+                                <td class="text-left">Aashirvaad Shudh Chakki Atta (5kg)</td>
+                                <td class="text-left">BAR990011</td>
+                                <td class="text-left">FMCG - Packaged Foods</td>
+                                <td class="text-right">₹260.00</td>
+                                <td class="text-right">50</td>
+                                <td class="text-right">30</td>
+                                <td class="text-center"><span class="badge-status status-green">In Stock</span></td>
+                                <td class="text-center no-print"><button class="btn-table">Select</button></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">SKU-223344</td>
+                                <td class="text-left">Surf Excel Easy Wash (1kg)</td>
+                                <td class="text-left">BAR223344</td>
+                                <td class="text-left">FMCG - Household</td>
+                                <td class="text-right">₹140.00</td>
+                                <td class="text-right">65</td>
+                                <td class="text-right">15</td>
+                                <td class="text-center"><span class="badge-status status-green">In Stock</span></td>
+                                <td class="text-center no-print"><button class="btn-table">Select</button></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">SKU-556677</td>
+                                <td class="text-left">Colgate MaxFresh Toothpaste</td>
+                                <td class="text-left">BAR556677</td>
+                                <td class="text-left">FMCG - Personal Care</td>
+                                <td class="text-right">₹115.00</td>
+                                <td class="text-right">92</td>
+                                <td class="text-right">25</td>
+                                <td class="text-center"><span class="badge-status status-green">In Stock</span></td>
+                                <td class="text-center no-print"><button class="btn-table">Select</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="sticky-sidebar-wrapper no-print">
+                <div class="card form-panel-card">
+                    <div class="panel-header"><i class="fa-solid fa-pen-to-square"></i> <h3>Quick Stock Update</h3></div>
+                    <form novalidate>
+                        <div class="form-fields-scroll-wrapper">
+                            <div class="form-group">
+                                <label>Choose Target Item</label>
+                                <select required>
+                                    <option value="SKU-402911" selected>SKU-402911 - Amul Taza Milk</option>
+                                    <option value="SKU-109402">SKU-109402 - Coca-Cola Zero Sugar</option>
+                                    <option value="SKU-884105">SKU-884105 - Britannia Marie Gold</option>
+                                    <option value="SKU-501224">SKU-501224 - Syska Smart Bulb</option>
+                                    <option value="SKU-600057">SKU-600057 - Diet Coke (330ml)</option>
+                                    <option value="SKU-779544">SKU-779544 - Lays Classic Chips</option>
+                                    <option value="SKU-112233">SKU-112233 - Cadbury Milk Silk</option>
+                                    <option value="SKU-445566">SKU-445566 - Nescafe Coffee</option>
+                                    <option value="SKU-778899">SKU-778899 - Tata Salt Iodized</option>
+                                    <option value="SKU-990011">SKU-990011 - Aashirvaad Atta</option>
+                                    <option value="SKU-223344">SKU-223344 - Surf Excel Wash</option>
+                                    <option value="SKU-556677">SKU-556677 - Colgate MaxFresh</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Update Action Type</label>
+                                <div class="radio-pill-group">
+                                    <label class="radio-pill">
+                                        <input type="radio" name="adjType" value="ADD" checked>
+                                        <span><i class="fa-solid fa-plus-circle"></i> Add Stock</span>
+                                    </label>
+                                    <label class="radio-pill">
+                                        <input type="radio" name="adjType" value="REMOVE">
+                                        <span><i class="fa-solid fa-minus-circle"></i> Remove Stock</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Quantity Amount</label>
+                                <input type="number" min="1" step="1" required value="20" placeholder="How many units?">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Reason for Update</label>
+                                <select required>
+                                    <option value="New Delivery" selected>New Stock Delivery</option>
+                                    <option value="Damaged Allocation">Damaged Items Allocation</option>
+                                    <option value="Expired Disposal">Expired Product Disposal</option>
+                                    <option value="Manual Audit">Manual Audit Correction</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Internal Audit Comments</label>
+                                <textarea rows="2" placeholder="Write any comments for manager review...">Incoming dairy freight box restock.</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-actions-row">
+                            <button type="button" class="btn btn-primary btn-block">Save Stock Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
