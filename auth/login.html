@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>System Authentication - CoreRetail ERP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./login.css">
+</head>
+<body>
+
+    <div id="toastAlert" class="toast-notification hidden">
+        <i class="fa-solid fa-circle-exclamation" style="font-size:1.1rem"></i>
+        <span id="toastMessage">Incorrect email or password</span>
+    </div>
+
+    <div class="split-container">
+        <section class="brand-panel">
+            <div class="brand-content">
+                <div class="system-icon-logo"><i class="fa-solid fa-layer-group"></i></div>
+                <h1 class="brand-title">Retail POS & Store Operations Management System</h1>
+                <p class="brand-subtitle">Manage products, billing, inventory, promotions, and reports efficiently.</p>
+                
+                <div class="features-grid">
+                    <div class="feature-item"><div class="feature-icon"><i class="fa-solid fa-cubes"></i></div><div class="feature-text"><h3>Products</h3><p>Centralized master data catalogs</p></div></div>
+                    <div class="feature-item"><div class="feature-icon"><i class="fa-solid fa-cash-register"></i></div><div class="feature-text"><h3>Billing</h3><p>High-throughput lane operations</p></div></div>
+                    <div class="feature-item"><div class="feature-icon"><i class="fa-solid fa-warehouse"></i></div><div class="feature-text"><h3>Inventory</h3><p>Real-time stock tracking & replenishment</p></div></div>
+                    <div class="feature-item"><div class="feature-icon"><i class="fa-solid fa-chart-pie"></i></div><div class="feature-text"><h3>Reports</h3><p>Granular operational insights</p></div></div>
+                </div>
+            </div>
+            <footer class="brand-footer"><p>© 2026 CoreRetail ERP Suite. All Rights Reserved.</p><p>Enterprise-grade reliability, localized performance.</p></footer>
+        </section>
+
+        <section class="form-panel">
+            <div class="form-container">
+                <header class="form-header">
+                    <h2>System Authentication</h2>
+                    <p>Enter your corporate credentials to log in.</p>
+                </header>
+                
+                <form id="authCoreEngineForm" novalidate>
+                    <div class="form-group">
+                        <label for="email">Corporate Email</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-envelope field-icon"></i>
+                            <input type="email" id="email" required placeholder="name@store.com" autocomplete="off">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-lock field-icon"></i>
+                            <input type="password" id="password" required placeholder="••••••••">
+                            <i class="fa-solid fa-eye visibility-toggle" id="eyeVisibilityBtn"></i>
+                        </div>
+                    </div>
+
+                    <div id="validationMatrixDashboard" class="validation-indicator-matrix hidden">
+                        <div class="matrix-criterion" id="ruleMinLen"><i class="fa-solid fa-circle-dot"></i> Minimum 8 character count</div>
+                        <div class="matrix-criterion" id="ruleMixAlpha"><i class="fa-solid fa-circle-dot"></i> Contains both letters and numbers</div>
+                    </div>
+
+                    <button type="submit" id="submitActionBtn" class="btn-submit" disabled>Sign In <i class="fa-solid fa-arrow-right"></i></button>
+                </form>
+
+                <section class="demo-tray">
+                    <h4>Demo Access Profiles</h4>
+                    <div class="demo-grid">
+                        <button class="btn-demo-preset" onclick="prefill('admin@store.com','admin123')"><strong>Admin:</strong> admin@store.com</button>
+                        <button class="btn-demo-preset" onclick="prefill('manager@store.com','manager123')"><strong>Manager:</strong> manager@store.com</button>
+                        <button class="btn-demo-preset" onclick="prefill('cashier@store.com','cashier123')"><strong>Cashier:</strong> cashier@store.com</button>
+                        <button class="btn-demo-preset" onclick="prefill('inventory@store.com','inventory123')"><strong>Inventory:</strong> inventory@store.com</button>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </div>
+   <script src="./auth.js"></script>
+</body>
+</html>
