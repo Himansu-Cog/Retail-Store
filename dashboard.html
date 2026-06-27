@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dashboard - CoreRetail</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./dashboard.css">
+</head>
+<body>
+
+    <header class="app-bar">
+        <div class="bar-left">
+            <div class="brand-signature"><i class="fa-solid fa-square-terminal"></i> CoreRetail <span>System</span></div>
+        </div>
+        <div class="profile-wrapper">
+            <div class="profile-pill" id="profileMenuTrigger">
+                <div class="avatar-box"><i class="fa-solid fa-user-tie"></i></div>
+                <div class="user-meta-text">
+                    <span id="navUserName" class="u-name">Loading...</span>
+                    <span id="navUserRole" class="u-role">Loading...</span>
+                </div>
+                <i class="fa-solid fa-angle-down" style="font-size:0.65rem; color:aliceblue; margin-left: 4px;"></i>
+            </div>
+            <div class="dropdown-menu hidden" id="dropdownMenu">
+                <a href="#" id="actionClearSession" class="logout-item"><i class="fa-solid fa-power-off"></i> Sign Out</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="workspace-scaffold">
+        <aside class="navigation-rail" id="sidebar">
+            <nav class="stack-group">
+                <a href="#" class="rail-link active" data-role="all"><i class="fa-solid fa-layer-group"></i> <span>Dashboard</span></a>
+                <a href="./pages/products.html" class="rail-link" data-role="Admin,Store Manager,Inventory Associate"><i class="fa-solid fa-boxes-packing"></i> <span>Product Listing</span></a>
+                <a href="./pages/billing.html" class="rail-link" data-role="Admin,Cashier"><i class="fa-solid fa-cash-register"></i> <span>Billing Section</span></a>
+                <a href="./pages/inventory.html" class="rail-link" data-role="Admin,Store Manager,Inventory Associate"><i class="fa-solid fa-warehouse"></i> <span>Inventory</span></a>
+                <a href="./pages/promotions.html" class="rail-link" data-role="Admin,Store Manager"><i class="fa-solid fa-tags"></i> <span>Promotion</span></a>
+                <a href="./pages/salesreport.html" class="rail-link" data-role="Admin,Store Manager"><i class="fa-solid fa-chart-line"></i> <span>Reports</span></a>
+            </nav>
+          
+        </aside>
+
+        <main class="viewport-deck">
+            <div class="viewport-header">
+                <div>
+                    <h2 id="greetingHeaderLabel">Welcome Back</h2>
+                    <p>Your Access Level: <span id="scopeDomainBadge" class="clearance-badge">Loading...</span></p>
+                </div>
+            </div>
+
+            <section class="metrics-grid">
+                <div class="metric-tile">
+                    <div class="tile-data">
+                        <span class="lbl">Total Products</span>
+                        <h3 class="num">14,240</h3>
+                        <span class="trend-sub positive"><i class="fa-solid fa-arrow-trend-up"></i> +2.4% this month</span>
+                    </div>
+                    <div class="icon-panel"><i class="fa-solid fa-box"></i></div>
+                </div>
+                <div class="metric-tile">
+                    <div class="tile-data">
+                        <span class="lbl">Today's Sales</span>
+                        <h3 class="num">₹1,84,250</h3>
+                        <span class="trend-sub positive"><i class="fa-solid fa-arrow-trend-up"></i> +12.8% vs yesterday</span>
+                    </div>
+                    <div class="icon-panel" style="color:var(--green-success)"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+                </div>
+                <div class="metric-tile">
+                    <div class="tile-data">
+                        <span class="lbl">Completed Bills</span>
+                        <h3 class="num">1,124</h3>
+                        <span class="trend-sub neutral">Normal store traffic</span>
+                    </div>
+                    <div class="icon-panel"><i class="fa-solid fa-receipt"></i></div>
+                </div>
+                <div class="metric-tile">
+                    <div class="tile-data">
+                        <span class="lbl">Low Stock Alerts</span>
+                        <h3 class="num" style="color:var(--amber-warning)">18</h3>
+                        <span class="trend-sub neutral">Items need re-ordering</span>
+                    </div>
+                    <div class="icon-panel" style="color:var(--amber-warning)"><i class="fa-solid fa-circle-exclamation"></i></div>
+                </div>
+            </section>
+
+            <div class="workspace-block-grid">
+                <section class="panel-card">
+                    <div class="panel-header">
+                        <h3>Recent Store Purchases</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Bill ID</th>
+                                    <th>Cashier Name</th>
+                                    <th>Payment Type</th>
+                                    <th>Total Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="code-pill">TXN-90412</span></td>
+                                    <td>Anjali Sharma</td>
+                                    <td>Card</td>
+                                    <td><strong>₹4,250.00</strong></td>
+                                    <td><span class="status-pill success">Paid</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="code-pill">TXN-90411</span></td>
+                                    <td>Rahul Verma</td>
+                                    <td>UPI QR Code</td>
+                                    <td><strong>₹890.00</strong></td>
+                                    <td><span class="status-pill success">Paid</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="code-pill">TXN-90410</span></td>
+                                    <td>Anjali Sharma</td>
+                                    <td>Cash</td>
+                                    <td><strong>₹14,500.00</strong></td>
+                                    <td><span class="status-pill warning">Pending</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="panel-card">
+                    <div class="panel-header">
+                        <h3>Quick Shortcuts</h3>
+                    </div>
+                    <div class="actions-list">
+                        <a href="./pages/products.html" class="btn-panel-action"><i class="fa-solid fa-plus"></i> Add New Product</a>
+                        <a href="./pages/billing.html" class="btn-panel-action"><i class="fa-solid fa-cash-register"></i> Open Billing Screen</a>
+                        <a href="./pages/inventory.html" class="btn-panel-action"><i class="fa-solid fa-warehouse"></i> Check Stock Levels</a>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+<
+</body>
+<script src="./dashboard.js"></script>
+</html>
