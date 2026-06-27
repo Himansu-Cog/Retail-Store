@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Catalog & Pricing Management</title>
+    <link rel="stylesheet" href="../css/products.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="toastContainer" class="toast-container"></div>
+    <header class="page-header">
+        <div class="header-inner">
+            <div>
+                <h1>Product Catalog & Pricing Management</h1>
+                <p class="subtitle">Manage products, pricing engines, SKU tracking segments, and system barcode properties.</p>
+            </div>
+            <div class="header-navigation">
+                <button type="button" id="btnHeaderInventory" class="btn btn-nav" title="View Inventory">
+                    <a style="text-decoration: none; color: inherit;" href="inventory.html">
+                        <i class="fa-solid fa-warehouse"></i> Inventory Page
+                    </a>
+                </button>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-info">
+                    <span class="label">Total Managed SKUs</span>
+                    <h3 id="statTotalProducts">20</h3>
+                </div>
+                <div class="stat-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-info">
+                    <span class="label">Active Categories</span>
+                    <h3 id="statTotalCategories">5</h3>
+                </div>
+                <div class="stat-icon"><i class="fa-solid fa-tags"></i></div>
+            </div>
+            <div class="stat-card warning-card">
+                <div class="stat-info">
+                    <span class="label">Low Stock Exceptions</span>
+                    <h3 id="statLowStock">3</h3>
+                </div>
+                <div class="stat-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            </div>
+            <div class="stat-card danger-card">
+                <div class="stat-info">
+                    <span class="label">Out of Stock Lines</span>
+                    <h3 id="statOutOfStock">1</h3>
+                </div>
+                <div class="stat-icon"><i class="fa-solid fa-circle-xmark"></i></div>
+            </div>
+        </section>
+        <div class="workspace-grid">
+            <div class="card">
+                <h2 id="formTitle">Add New Product</h2>
+                <form id="productForm" novalidate>
+                    <input type="hidden" id="editProductId">
+                    <div class="form-group">
+                        <label for="productName">Product Name</label>
+                        <input type="text" id="productName" required placeholder="e.g., Amul Taza Fresh Milk (1L)">
+                    </div>
+                    <div class="form-group">
+                        <label for="productCategory">Category</label>
+                        <select id="productCategory" required>
+                            <option value="" disabled selected>Select Category Option</option>
+                            <option value="FMCG - Perishables">FMCG - Perishables</option>
+                            <option value="FMCG - Beverages">FMCG - Beverages</option>
+                            <option value="FMCG - Packaged Foods">FMCG - Packaged Foods</option>
+                            <option value="Consumer Electronics">Consumer Electronics</option>
+                            <option value="Apparel & Textiles">Apparel & Textiles</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productPrice">Price</label>
+                            <input type="number" id="productPrice" min="0" step="0.01" required placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="productStock">Stock Quantity</label>
+                            <input type="number" id="productStock" min="0" step="1" required placeholder="0">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="productSupplier">Supplier Master</label>
+                        <input type="text" id="productSupplier" required placeholder="e.g., Amul Dairy Corp">
+                    </div>
+                    <div class="form-group">
+                        <label for="productThreshold">Safety Threshold Level</label>
+                        <input type="number" id="productThreshold" min="1" value="15" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" id="btnReset" class="btn btn-outline">Clear</button>
+                        <button type="submit" id="btnSubmit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card">
+                <div class="filter-toolbar">
+                    <div class="search-wrapper">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="searchFilter" placeholder="Search by description, SKU ID, or barcode...">
+                    </div>
+                    <div class="select-wrapper">
+                        <select id="categoryFilter">
+                            <option value="ALL">All Categories</option>
+                            <option value="FMCG - Perishables">FMCG - Perishables</option>
+                            <option value="FMCG - Beverages">FMCG - Beverages</option>
+                            <option value="FMCG - Packaged Foods">FMCG - Packaged Foods</option>
+                            <option value="Consumer Electronics">Consumer Electronics</option>
+                            <option value="Apparel & Textiles">Apparel & Textiles</option>
+                        </select>
+                    </div>
+                    <div class="select-wrapper">
+                        <select id="sortSelector">
+                            <option value="DEFAULT">Sort Order Architecture</option>
+                            <option value="PRICE_ASC">Price: Low to High</option>
+                            <option value="PRICE_DESC">Price: High to Low</option>
+                            <option value="STOCK_ASC">Stock Capacity: Low to High</option>
+                            <option value="STOCK_DESC">Stock Capacity: High to Low</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="enterprise-table" id="productTable">
+                        <thead>
+                            <tr>
+                                <th>Product ID</th>
+                                <th>Description</th>
+                                <th>Category Node</th>
+                                <th>Price</th>
+                                <th>Stock Vol</th>
+                                <th>Barcode Master</th>
+                                <th class="text-center" style="width: 150px;">Operations</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productTableBody">
+                            <tr>
+                                <td>PROD-001</td>
+                                <td><strong>Amul Taaza Fresh Milk (1L)</strong><br><small>Supplier: Amul Dairy Corp</small></td>
+                                <td><span class="badge badge-perishables">FMCG - Perishables</span></td>
+                                <td>₹66.00</td>
+                                <td>120</td>
+                                <td>8901262010112</td>
+                                <td class="text-center">
+                                    <button class="btn-icon" title="View Profile"><i class="fa-solid fa-eye"></i></button>
+                                    <button class="btn-icon" title="Edit SKU"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="btn-icon text-danger" title="Delete Product"><i class="fa-solid fa-trash"></i></button>
+                                    <button class="btn-icon" title="Barcode Utility"><i class="fa-solid fa-barcode"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>PROD-002</td>
+                                <td><strong>Britannia Cheese Slices (200g)</strong><br><small>Supplier: Britannia Industries</small></td>
+                                <td><span class="badge badge-perishables">FMCG - Perishables</span></td>
+                                <td>₹145.00</td>
+                                <td>45</td>
+                                <td>8901063142210</td>
+                                <td class="text-center">
+                                    <button class="btn-icon"><i class="fa-solid fa-eye"></i></button>
+                                    <button class="btn-icon"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="btn-icon text-danger"><i class="fa-solid fa-trash"></i></button>
+                                    <button class="btn-icon"><i class="fa-solid fa-barcode"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>PROD-003</td>
+                                <td><strong>Mother Dairy Salted Butter (500g)</strong><br><small>Supplier: Mother Dairy Ltd</small></td>
+                                <td><span class="badge badge-perishables">FMCG - Perishables</span></td>
+                                <td>₹275.00</td>
+                                <td>8</td>
+                                <td>8901648002021</td>
+                                <td class="text-center">
+                                    <button class="btn-icon"><i class="fa-solid fa-eye"></i></button>
+                                    <button class="btn-icon"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="btn-icon text-danger"><i class="fa-solid fa-trash"></i></button>
+                                    <button class="btn-icon"><i class="fa-solid fa-barcode"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>PROD-004</td>
+                                <td><strong>iD Fresh Premium Idly & Dosa Batter (1kg)</strong><br><small>Supplier: iD Fresh Food</small></td>
+                                <td><span class="badge badge-perishables">FMCG - Perishables</span></td>
+                                <td>₹90.00</td>
+                                <td>0</td>
+                                <td>8906020560042</td>
+                                <td class="text-center">
+                                    <button class="btn-icon"><i class="fa-solid fa-eye"></i></button>
+                                    <button class="btn-icon"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="btn-icon text-danger"><i class="fa-solid fa-trash"></i></button>
+                                    <button class="btn-icon"><i class="fa-solid fa-barcode"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>PROD-005</td>
+                                <td><strong>Coca-Cola Original Taste (2L)</strong><br><small>Supplier: Hindustan Coca-Cola</small></td>
+                                <td><span class="badge badge-beverages">FMCG - Beverages</span></td>
+                                <td>₹100.00</td>
+                                <td>250</td>
+                                <td>4900000764311</td>
+                                <td class="text-center">
+                                    <button class="btn-icon"><i class="fa-solid fa-eye"></i></button>
+                                    <button class="btn-icon"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="btn-icon text-danger"><i class="fa-solid fa-trash"></i></button>
+                                    <button class="btn-icon"><i class="fa-solid fa-barcode"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>PROD-013</td>
+                                <td><strong>Boat Rockerz 450 Bluetooth Headphones</strong><br><small>Supplier: Imagine Marketing Ltd</small></td>
+                                <td><span class="badge badge-electronics">Consumer Electronics</span></td>
+                                <td>₹1,499.00</td>
+                                <td>85</td>
+                                <td>8906112143003</td>
+                                <td class="text-center">
+                                    <button class="btn-icon"><i class="fa-solid fa-eye"></i></button>
+                                    <button class="btn-icon"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="btn-icon text-danger"><i class="fa-solid fa-trash"></i></button>
+                                    <button class="btn-icon"><i class="fa-solid fa-barcode"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>PROD-017</td>
+                                <td><strong>Peter England Men's Slim Fit Shirt (L)</strong><br><small>Supplier: Aditya Birla Fashion</small></td>
+                                <td><span class="badge badge-apparel">Apparel & Textiles</span></td>
+                                <td>₹1,299.00</td>
+                                <td>35</td>
+                                <td>8903124510091</td>
+                                <td class="text-center">
+                                    <button class="btn-icon"><i class="fa-solid fa-eye"></i></button>
+                                    <button class="btn-icon"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="btn-icon text-danger"><i class="fa-solid fa-trash"></i></button>
+                                    <button class="btn-icon"><i class="fa-solid fa-barcode"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>PROD-018</td>
+                                <td><strong>Levis Men's 511 Slim Fit Jeans (32)</strong><br><small>Supplier: Levi Strauss India</small></td>
+                                <td><span class="badge badge-apparel">Apparel & Textiles</span></td>
+                                <td>₹2,899.00</td>
+                                <td>22</td>
+                                <td>0393042188142</td>
+                                <td class="text-center">
+                                    <button class="btn-icon"><i class="fa-solid fa-eye"></i></button>
+                                    <button class="btn-icon"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="btn-icon text-danger"><i class="fa-solid fa-trash"></i></button>
+                                    <button class="btn-icon"><i class="fa-solid fa-barcode"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>PROD-019</td>
+                                <td><strong>Puma Unisex Cotton Crew Socks (Pack of 3)</strong><br><small>Supplier: Puma Sports India</small></td>
+                                <td><span class="badge badge-apparel">Apparel & Textiles</span></td>
+                                <td>₹449.00</td>
+                                <td>110</td>
+                                <td>4059504421291</td>
+                                <td class="text-center">
+                                    <button class="btn-icon"><i class="fa-solid fa-eye"></i></button>
+                                    <button class="btn-icon"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="btn-icon text-danger"><i class="fa-solid fa-trash"></i></button>
+                                    <button class="btn-icon"><i class="fa-solid fa-barcode"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>PROD-020</td>
+                                <td><strong>Adidas Performance Training Gym Tee (M)</strong><br><small>Supplier: Adidas India Marketing</small></td>
+                                <td><span class="badge badge-apparel">Apparel & Textiles</span></td>
+                                <td>₹1,799.00</td>
+                                <td>48</td>
+                                <td>4064055214872</td>
+                                <td class="text-center">
+                                    <button class="btn-icon"><i class="fa-solid fa-eye"></i></button>
+                                    <button class="btn-icon"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="btn-icon text-danger"><i class="fa-solid fa-trash"></i></button>
+                                    <button class="btn-icon"><i class="fa-solid fa-barcode"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="confirmModal" class="modal-overlay hidden">
+        <div class="modal-card modal-narrow text-center">
+            <div class="modal-body alert-modal-padding">
+                <div class="success-icon-wrapper" style="color: var(--danger);">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <h3>Confirm Removal Protocol</h3>
+                <p id="confirmModalMessage">Are you sure you want to permanently delete this product?</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px;">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('confirmModal')" style="justify-content: center;">Abort Action</button>
+                    <button type="button" id="btnConfirmDelete" class="btn btn-primary" style="background: var(--danger); border-color: var(--danger); justify-content: center;">Execute Drop</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="viewModal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Product Master Profile Inspection</h3>
+                <button class="close-modal-btn" onclick="closeModal('viewModal')">&times;</button>
+            </div>
+            <div class="modal-body" id="viewModalContent"></div>
+        </div>
+    </div>
+    <div id="barcodeModal" class="modal-overlay hidden">
+        <div class="modal-card modal-narrow">
+            <div class="modal-header">
+                <h3>Corporate Barcode Generation Utility</h3>
+                <button class="close-modal-btn" onclick="closeModal('barcodeModal')">&times;</button>
+            </div>
+            <div class="modal-body text-center">
+                <div class="barcode-render-box">
+                    <svg id="barcodeSvgTarget"></svg>
+                    <p id="barcodeStringValue" class="barcode-text-string">---</p>
+                </div>
+                <div class="barcode-actions-grid">
+                    <button class="btn btn-outline" id="btnCopyBarcode"><i class="fa-solid fa-copy"></i> Copy Value</button>
+                    <button class="btn btn-outline" id="btnDownloadBarcode"><i class="fa-solid fa-download"></i> Save Image</button>
+                    <button class="btn btn-danger-action" id="btnRegenerateBarcode"><i class="fa-solid fa-rotate"></i> Regenerate</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/products.js"> </script>
+</body>
+</html>
