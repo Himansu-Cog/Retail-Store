@@ -9,6 +9,8 @@
 </head>
 <body class="erp-workspace">
 
+    <div id="toast-container" class="toast-container no-print"></div>
+
     <div class="app-container">
         <header class="erp-header no-print">
             <div class="header-brand">
@@ -19,7 +21,7 @@
             </div>
             <div class="action-toolbar">
                 <a href="../dashboard.html" class="btn btn-outline" style="text-decoration:none;"><i class="fa-solid fa-house"></i> Home Dashboard</a>
-                <button type="button" class="btn btn-primary"><i class="fa-solid fa-print"></i> Print Items List</button>
+                <button type="button" class="btn btn-primary" onclick="window.print()"><i class="fa-solid fa-print"></i> Print Items List</button>
             </div>
         </header>
 
@@ -128,7 +130,7 @@
                                 <td class="text-right">4</td>
                                 <td class="text-right">15</td>
                                 <td class="text-center"><span class="badge-status status-orange">Low Stock</span></td>
-                                <td class="text-center no-print"><button class="btn-table">Select</button></td>
+                                <td class="text-center no-print"><button type="button" class="btn-table" data-sku="SKU-402911">Select</button></td>
                             </tr>
                             <tr>
                                 <td class="text-left">SKU-109402</td>
@@ -139,7 +141,7 @@
                                 <td class="text-right">0</td>
                                 <td class="text-right">20</td>
                                 <td class="text-center"><span class="badge-status status-red">Out Of Stock</span></td>
-                                <td class="text-center no-print"><button class="btn-table">Select</button></td>
+                                <td class="text-center no-print"><button type="button" class="btn-table" data-sku="SKU-109402">Select</button></td>
                             </tr>
                             <tr>
                                 <td class="text-left">SKU-884105</td>
@@ -150,7 +152,7 @@
                                 <td class="text-right">200</td>
                                 <td class="text-right">25</td>
                                 <td class="text-center"><span class="badge-status status-green">In Stock</span></td>
-                                <td class="text-center no-print"><button class="btn-table">Select</button></td>
+                                <td class="text-center no-print"><button type="button" class="btn-table" data-sku="SKU-884105">Select</button></td>
                             </tr>
                             <tr>
                                 <td class="text-left">SKU-501224</td>
@@ -161,7 +163,7 @@
                                 <td class="text-right">32</td>
                                 <td class="text-right">10</td>
                                 <td class="text-center"><span class="badge-status status-green">In Stock</span></td>
-                                <td class="text-center no-print"><button class="btn-table">Select</button></td>
+                                <td class="text-center no-print"><button type="button" class="btn-table" data-sku="SKU-501224">Select</button></td>
                             </tr>
                             <tr>
                                 <td class="text-left">SKU-600057</td>
@@ -172,7 +174,7 @@
                                 <td class="text-right">200</td>
                                 <td class="text-right">100</td>
                                 <td class="text-center"><span class="badge-status status-green">In Stock</span></td>
-                                <td class="text-center no-print"><button class="btn-table">Select</button></td>
+                                <td class="text-center no-print"><button type="button" class="btn-table" data-sku="SKU-600057">Select</button></td>
                             </tr>
                             <tr>
                                 <td class="text-left">SKU-779544</td>
@@ -183,7 +185,7 @@
                                 <td class="text-right">100</td>
                                 <td class="text-right">15</td>
                                 <td class="text-center"><span class="badge-status status-green">In Stock</span></td>
-                                <td class="text-center no-print"><button class="btn-table">Select</button></td>
+                                <td class="text-center no-print"><button type="button" class="btn-table" data-sku="SKU-779544">Select</button></td>
                             </tr>
                             <tr>
                                 <td class="text-left">SKU-112233</td>
@@ -194,7 +196,7 @@
                                 <td class="text-right">43</td>
                                 <td class="text-right">20</td>
                                 <td class="text-center"><span class="badge-status status-green">In Stock</span></td>
-                                <td class="text-center no-print"><button class="btn-table">Select</button></td>
+                                <td class="text-center no-print"><button type="button" class="btn-table" data-sku="SKU-112233">Select</button></td>
                             </tr>
                             <tr>
                                 <td class="text-left">SKU-445566</td>
@@ -205,7 +207,7 @@
                                 <td class="text-right">0</td>
                                 <td class="text-right">15</td>
                                 <td class="text-center"><span class="badge-status status-red">Out Of Stock</span></td>
-                                <td class="text-center no-print"><button class="btn-table">Select</button></td>
+                                <td class="text-center no-print"><button type="button" class="btn-table" data-sku="SKU-445566">Select</button></td>
                             </tr>
                             <tr>
                                 <td class="text-left">SKU-778899</td>
@@ -216,7 +218,7 @@
                                 <td class="text-right">400</td>
                                 <td class="text-right">50</td>
                                 <td class="text-center"><span class="badge-status status-green">In Stock</span></td>
-                                <td class="text-center no-print"><button class="btn-table">Select</button></td>
+                                <td class="text-center no-print"><button type="button" class="btn-table" data-sku="SKU-778899">Select</button></td>
                             </tr>
                             <tr>
                                 <td class="text-left">SKU-990011</td>
@@ -227,7 +229,7 @@
                                 <td class="text-right">50</td>
                                 <td class="text-right">30</td>
                                 <td class="text-center"><span class="badge-status status-green">In Stock</span></td>
-                                <td class="text-center no-print"><button class="btn-table">Select</button></td>
+                                <td class="text-center no-print"><button type="button" class="btn-table" data-sku="SKU-990011">Select</button></td>
                             </tr>
                             <tr>
                                 <td class="text-left">SKU-223344</td>
@@ -238,7 +240,7 @@
                                 <td class="text-right">65</td>
                                 <td class="text-right">15</td>
                                 <td class="text-center"><span class="badge-status status-green">In Stock</span></td>
-                                <td class="text-center no-print"><button class="btn-table">Select</button></td>
+                                <td class="text-center no-print"><button type="button" class="btn-table" data-sku="SKU-223344">Select</button></td>
                             </tr>
                             <tr>
                                 <td class="text-left">SKU-556677</td>
@@ -249,7 +251,7 @@
                                 <td class="text-right">92</td>
                                 <td class="text-right">25</td>
                                 <td class="text-center"><span class="badge-status status-green">In Stock</span></td>
-                                <td class="text-center no-print"><button class="btn-table">Select</button></td>
+                                <td class="text-center no-print"><button type="button" class="btn-table" data-sku="SKU-556677">Select</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -259,11 +261,11 @@
             <div class="sticky-sidebar-wrapper no-print">
                 <div class="card form-panel-card">
                     <div class="panel-header"><i class="fa-solid fa-pen-to-square"></i> <h3>Quick Stock Update</h3></div>
-                    <form novalidate>
+                    <form id="stockUpdateForm">
                         <div class="form-fields-scroll-wrapper">
                             <div class="form-group">
                                 <label>Choose Target Item</label>
-                                <select required>
+                                <select id="targetItem" required>
                                     <option value="SKU-402911" selected>SKU-402911 - Amul Taza Milk</option>
                                     <option value="SKU-109402">SKU-109402 - Coca-Cola Zero Sugar</option>
                                     <option value="SKU-884105">SKU-884105 - Britannia Marie Gold</option>
@@ -295,7 +297,7 @@
 
                             <div class="form-group">
                                 <label>Quantity Amount</label>
-                                <input type="number" min="1" step="1" required value="20" placeholder="How many units?">
+                                <input type="number" id="quantAmount" min="1" step="1" required value="20" placeholder="How many units?">
                             </div>
 
                             <div class="form-group">
@@ -310,12 +312,12 @@
 
                             <div class="form-group">
                                 <label>Internal Audit Comments</label>
-                                <textarea rows="2" placeholder="Write any comments for manager review...">Incoming dairy freight box restock.</textarea>
+                                <textarea id="auditComments" rows="2" placeholder="Write any comments for manager review...">Incoming dairy freight box restock.</textarea>
                             </div>
                         </div>
 
                         <div class="form-actions-row">
-                            <button type="button" class="btn btn-primary btn-block">Save Stock Update</button>
+                            <button type="submit" class="btn btn-primary btn-block">Save Stock Update</button>
                         </div>
                     </form>
                 </div>
@@ -323,5 +325,6 @@
 
         </div>
     </div>
+    <script src="../js/inventory.js"></script>
 </body>
 </html>
