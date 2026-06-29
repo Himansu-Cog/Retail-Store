@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promotions & Discount Rule Engine</title>
+    <link rel="stylesheet" href="../css/promotions.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="erp-workspace">
+
+    <div id="toastContainer" class="toast-container"></div>
+ 
+    <div class="app-container">
+        <header class="module-header">
+            <div>
+                <h1>Promotions & Discount Rule Engine Matrix</h1>
+            </div>
+            <div class="header-navigation-hub">
+                <a href="../dashboard.html" class="btn btn-outline btn-sm"><i class="fa-solid fa-chart-pie"></i> Go to Dashboard</a>
+                <a href="./billing.html" class="btn btn-outline btn-sm"><i class="fa-solid fa-calculator"></i> Go to Billing</a>
+            </div>
+        </header>
+ 
+        <section class="stats-grid" id="kpiStatsGrid">
+            <div class="kpi-card">
+                <div class="kpi-desc-box">
+                    <label>Active Rules</label>
+                    <h3>2</h3>
+                </div>
+                <div class="kpi-icon" style="color: var(--success);"><i class="fa-solid fa-circle-check"></i></div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-desc-box">
+                    <label>Total Rules</label>
+                    <h3>3</h3>
+                </div>
+                <div class="kpi-icon" style="color: var(--primary-color);"><i class="fa-solid fa-tags"></i></div>
+            </div>
+        </section>
+ 
+        <div class="workspace-grid">
+           
+            <div class="card form-panel-card">
+                <h2 id="formTitle">Deploy / Update Promotion Rule</h2>
+                
+                <form id="promoForm">
+                    
+                    <div class="form-group">
+                        <label for="promotionId">Promotion ID (Auto)</label>
+                        <input type="text" id="promotionId" placeholder="Allocated by database sequence" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="scopeSelection">Scope Target Assignment</label>
+                        <select id="scopeSelection" required>
+                            <option value="" disabled selected>-- Select Rule Target Scope --</option>
+                            <option value="STORE_WIDE">Entire Store (Global Offer)</option>
+                            <optgroup label="Product SKU Targets (productId FK) [cite: 94]">
+                                <option value="101">Product SKU ID: 101</option>
+                                <option value="102">Product SKU ID: 102</option>
+                                <option value="103">Product SKU ID: 103</option>
+                            </optgroup>
+                            <optgroup label="FMCG Department Categories">
+                                <option value="CAT-PERISH">FMCG - Perishables</option>
+                                <option value="CAT-PACKAGED">FMCG - Packaged Foods</option>
+                            </optgroup>
+                        </select>
+                    </div>
+ 
+                    <div class="form-group">
+                        <label for="discountPercent">Discount Percentage (%)</label>
+                        <input type="number" id="discountPercent" min="0" max="100.00" step="5" required placeholder="Min 0 & Max 100.00">
+                    </div>
+ 
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="startDate">Valid From (Start Date)</label>
+                            <input type="date" id="startDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="endDate">Valid Until (End Date)</label>
+                            <input type="date" id="endDate" required>
+                        </div>
+                    </div>
+
+                    <div class="form-actions-row">
+                        <button type="reset" class="btn btn-outline" id="btnClear">Clear Fields</button>
+                        <button type="submit" id="btnSubmitForm" class="btn btn-primary">Deploy Rule Configuration</button>
+                    </div>
+                </form>
+            </div>
+ 
+            <div class="card table-panel-card">
+                <div class="filter-toolbar">
+                    <div class="search-box-wrapper">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="searchFilter" placeholder="Live search rules registry data table...">
+                    </div>
+                </div>
+ 
+                <div class="table-responsive">
+                    <table class="erp-table">
+                        <thead>
+                            <tr>
+                                <th>Promotion ID</th>
+                                <th>Target </th>
+                                <th class="text-right">Discount Percent</th>
+                                <th>Validity Period Timeline</th>
+                                <th class="text-center">Status Flag</th>
+                                <th class="text-center">Actions Matrix</th>
+                            </tr>
+                        </thead>
+                        <tbody id="promotionsTableBody">
+                            <tr>
+                                <td><code>PRM-501102</code></td>
+                                <td class="item-scope">STORE_WIDE</td>
+                                <td class="text-right value-cell" data-val="50.00">50.00%</td>
+                                <td><span class="t-start">2026-06-01</span> to <span class="t-end">2026-07-31</span></td>
+                                <td class="text-center"><span class="badge-state state-active">Active</span></td>
+                                <td class="text-center">
+                                    <button type="button" class="btn-action-trigger select-row-btn"><i class="fa-solid fa-arrow-left"></i> Select</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><code>PRM-102944</code></td>
+                                <td class="item-scope">102</td>
+                                <td class="text-right value-cell" data-val="20.00">20.00%</td>
+                                <td><span class="t-start">2026-01-01</span> to <span class="t-end">2026-12-31</span></td>
+                                <td class="text-center"><span class="badge-state state-active">Active</span></td>
+                                <td class="text-center">
+                                    <button type="button" class="btn-action-trigger select-row-btn"><i class="fa-solid fa-arrow-left"></i> Select</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><code>PRM-003712</code></td>
+                                <td class="item-scope">CAT-PACKAGED</td>
+                                <td class="text-right value-cell" data-val="20.00">20.00%</td>
+                                <td><span class="t-start">2026-02-15</span> to <span class="t-end">2026-03-15</span></td>
+                                <td class="text-center"><span class="badge-state state-expired">Expired</span></td>
+                                <td class="text-center">
+                                    <button type="button" class="btn-action-trigger select-row-btn"><i class="fa-solid fa-arrow-left"></i> Select</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <script src="../js/promotions.js"></script>
+</body>
+</html>
