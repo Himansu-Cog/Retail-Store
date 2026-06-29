@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
         t.style.cssText = `padding:12px 20px; margin:8px 0; border-radius:4px; color:#fff; font-weight:500; display:flex; background:${type==='success'?'#2ec4b6':type==='warning'?'#ff9f1c':'#e71d36'}`;
         t.innerHTML = `<span><i class="fa-solid ${type==='success'?'fa-circle-check':'fa-triangle-exclamation'}"></i> ${msg}</span>`;
         T.appendChild(t);
-        setTimeout(() => t.remove(), 10000);
+        setTimeout(() => t.remove(), 3500);
     };
     const validateField = (el) => {
         let isValid = el.checkValidity();
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
             isValid = val.length >= 3 && val.length <= 100 && strictTextRegex.test(val);
         }
         el.style.borderColor = isValid ? "#2ec4b6" : "#e71d36";
-        el.style.backgroundColor = isValid ? "rgba(46,196,182,0.02)" : "rgba(231,29,54,0.02)";
+        // el.style.backgroundColor = isValid ? "rgba(46,196,182,0.02)" : "rgba(231,29,54,0.02)";
         return isValid;
     };
     [...F.querySelectorAll("input, select")].forEach(i => i.addEventListener("input", () => validateField(i)));
@@ -37,10 +37,10 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (!strictTextRegex.test(supplierVal)) {
             errors.push("Supplier Master contains illegal system syntax or lacks alphabetic text characters.");
         }
-        if (!F.productCategory.value) errors.push("A structural Category Node must be assigned.");
+        if (!F.productCategory.value) errors.push("Select The Category.");
         if (parseFloat(F.productPrice.value) <= 0 || isNaN(F.productPrice.value)) errors.push("Price evaluation error: Value must be strictly greater than 0.");
-        if (parseInt(F.productStock.value, 10) < 0 || isNaN(F.productStock.value)) errors.push("Stock volume error: Quantity cannot be lower than 0.");
-        if (parseInt(F.productThreshold.value, 10) < 1 || isNaN(F.productThreshold.value)) errors.push("Safety Threshold verification failure: Must be at minimum 1 unit.");
+        if (parseInt(F.productStock.value) < 0 || isNaN(F.productStock.value)) errors.push("Stock volume error: Quantity cannot be lower than 0.");
+        if (parseInt(F.productThreshold.value) < 1 || isNaN(F.productThreshold.value)) errors.push("Safety Threshold verification failure: Must be at minimum 1 unit.");
         if (errors.length > 0) return errors.forEach(err => notify(err, "danger"));
         notify(`SKU "${nameVal}" compiled and committed safely!`, "success");
         F.reset();
@@ -52,14 +52,5 @@ document.addEventListener("DOMContentLoaded", () => {
             e.target.value = e.target.value.replace(/[<>"{}$]/g, "");
         }
     });
-    if (B) B.addEventListener("click", (e) => {
-        const btn = e.target.closest("button");
-        if (!btn) return;
-        const row = btn.closest("tr"), id = row?.cells[0].innerText, barcode = row?.cells[5].innerText;
-        if (btn.classList.contains("text-danger") || btn.querySelector(".fa-trash")) {
-            notify(`Warning: Active initialization protocol to drop ${id}. Check security clearance.`, "warning");
-        } else if (btn.querySelector(".fa-barcode")) {
-            (!barcode || barcode === "---") ? notify("Negative Execution: No valid master barcode data assigned.", "danger") : notify(`Positive Retrieval: Barcode pipeline opened for ${barcode}.`, "success");
-        }
-    });
+
 });
